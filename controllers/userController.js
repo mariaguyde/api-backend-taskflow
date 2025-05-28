@@ -4,19 +4,19 @@ const bcrypt = require('bcrypt');
 // Créer un utilisateur
 const registerUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    if (!username || !password)
-      return res.status(400).json({ message: 'Username and password required' });
+    const { pseudo, password } = req.body;
+    if (!pseudo || !password)
+      return res.status(400).json({ message: 'pseudo and password required' });
 
-    const existing = await User.findOne({ username });
-    if (existing) return res.status(400).json({ message: 'Username already taken' });
+    const existing = await User.findOne({ pseudo });
+    if (existing) return res.status(400).json({ message: 'pseudo already taken' });
 
-    const user = new User({ username, password });
+    const user = new User({ pseudo, password });
     const savedUser = await user.save();
 
     res.status(201).json({
       id: savedUser._id,
-      username: savedUser.username,
+      pseudo: savedUser.pseudo,
       createdAt: savedUser.createdAt
     });
   } catch (err) {
@@ -27,15 +27,15 @@ const registerUser = async (req, res) => {
 // Connexion utilisateur (login basique)
 const loginUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { pseudo, password } = req.body;
+    const user = await User.findOne({ pseudo });
 
     if (!user) return res.status(400).json({ message: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-    res.json({ message: 'Login successful', username: user.username });
+    res.json({ message: 'Login successful', pseudo: user.pseudo });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
