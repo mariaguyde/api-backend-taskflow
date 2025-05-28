@@ -1,6 +1,17 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
+
+// GET - récupérer toutes les tâches
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // Créer un utilisateur
 const registerUser = async (req, res) => {
   try {
@@ -41,4 +52,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { getUsers, registerUser, loginUser };
