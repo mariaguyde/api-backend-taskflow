@@ -5,7 +5,7 @@ const {
   createColumns,
 } = require('../controllers/columnController');
 
-router.get('/', getTasks);
-router.post('/', createTask);
+router.get('/', getColumns);
+router.post('/', createColumns);
 
 module.exports = router;
