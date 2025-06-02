@@ -18,7 +18,7 @@ const createColumns = async (req, res) => {
       return res.status(400).json({ message: 'title is required' });
     }
 
-    const newColumn = new Task({ title });
+    const newColumn = new Column({ title });
     const savedColumn = await newColumn.save();
     res.status(201).json(savedColumn);
   } catch (err) {
