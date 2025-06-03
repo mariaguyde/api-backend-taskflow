@@ -13,12 +13,12 @@ const getTasks = async (req, res) => {
 // POST - créer une tâche (title seulement)
 const createTask = async (req, res) => {
   try {
-    const { title } = req.body;
-    if (!title) {
-      return res.status(400).json({ message: 'title is required' });
+    const { task, column_id, user_id } = req.body;
+    if (!task || !column_id || !user_id) {
+      return res.status(400).json({ message: 'task (name, columnID, userID) is required' });
     }
 
-    const newTask = new Task({ title });
+    const newTask = new Task({ title, column_id, user_id });
     const savedTask = await newTask.save();
     res.status(201).json(savedTask);
   } catch (err) {
