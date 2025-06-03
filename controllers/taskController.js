@@ -14,7 +14,7 @@ const getTasks = async (req, res) => {
 const getTasksUser = async (req, res) => {
   try {
     const { user_id } = req.body;
-    const tasksUser = await Task.find({user_id: user_id});
+    const tasksUser = await Task.find({user_id});
     res.json(tasksUser);
   } catch (err) {
     res.status(500).json({ message: err.message });
