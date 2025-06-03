@@ -18,7 +18,7 @@ const createTask = async (req, res) => {
       return res.status(400).json({ message: 'task (name, columnID, userID) is required' });
     }
 
-    const newTask = new Task({ title, column_id, user_id });
+    const newTask = new Task({ task, column_id, user_id });
     const savedTask = await newTask.save();
     res.status(201).json(savedTask);
   } catch (err) {
