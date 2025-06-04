@@ -13,7 +13,7 @@ const getTasks = async (req, res) => {
 
 const getTasksUser = async (req, res) => {
   try {
-    const { user_id } = req.body;
+    const { user_id } = req.params.user_id;
     const tasksUser = await Task.find({user_id:user_id}).exec();
 
     res.json(tasksUser);
