@@ -14,7 +14,6 @@ const getTasks = async (req, res) => {
 const getTasksUser = async (req, res) => {
   try {
     const tasksUser = await Task.find({user_id: req.params.user_id});
-
     res.json(tasksUser);
   } catch (err) {
     res.status(500).json({ message: err.message + " et la valeur du param userID est : "+ req.params.user_id });
